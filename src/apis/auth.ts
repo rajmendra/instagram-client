@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3001'
+import { API_URL } from '../constant';
 
 const registerUser = async (userData: any): Promise<any> => {
   try {

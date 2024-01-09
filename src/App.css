@@ -5,6 +5,10 @@
   padding: 20px;
   font-family: 'Arial', sans-serif;
 }
+.center{
+  text-align: center;
+  width: 100%;
+}
 .header {
   text-align: center;
   background-color: #4caf50;

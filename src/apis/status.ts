@@ -1,6 +1,6 @@
 import { Status } from './interfaceDefs'
+import { API_URL } from '../constant';
 
-const API_URL = 'http://localhost:3001'
 const fetchStatus = async (userId: any): Promise<Status[]> => {
   try {
     const response = await fetch(`${API_URL}/status`)

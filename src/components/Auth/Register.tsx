@@ -27,6 +27,7 @@ const Registration: React.FC = () => {
     email: '',
     bio: '',
   })
+  const [is_saving, setUploading] = useState(false)
   const navigate = useNavigate()
 
   const handleInputChange = (
@@ -37,13 +38,17 @@ const Registration: React.FC = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-
+    setUploading(true);
     try {
       const response = await registerUser(formData)
       console.log('Registration successful:', response.message)
       toast.success('Registration successful')
       navigate('/login')
+      
+    setUploading(false);
     } catch (error) {
+      
+    setUploading(false);
       handleRegistrationError(error)
     }
   }
@@ -91,8 +96,9 @@ const Registration: React.FC = () => {
 
         <label>Bio:</label>
         <textarea name="bio" onChange={handleInputChange}></textarea>
-
-        <button type="submit">Register</button>
+        <button disabled={is_saving} type="submit">
+          {is_saving ? 'Registering...' : 'Register'}
+        </button>
       </form>
     </div>
   )

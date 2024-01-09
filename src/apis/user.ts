@@ -1,6 +1,6 @@
 import { EditUser } from './interfaceDefs'
+import { API_URL } from '../constant';
 
-const API_URL = 'http://localhost:3001'
 const getUserProfile = async (userId: any): Promise<EditUser> => {
   try {
     const response = await fetch(`${API_URL}/user/profile/${userId}`)
