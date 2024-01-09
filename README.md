@@ -30,17 +30,7 @@ Welcome to the Instagram Client frontend!
 
 5. The frontend development server will be running at `http://localhost:3000` by default.
 
-## Project Structure
 
-Explain the structure of your frontend project.
-
-## Contributing
-
-Explain how others can contribute to your frontend project.
-
-## Additional Notes
-
-Include any additional information or notes about your frontend project.
 
 ## License
 
