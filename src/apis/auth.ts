@@ -1,47 +1,18 @@
-import { API_URL } from '../constant';
+import { apiCall } from '../utils';
+import { API_URL } from '../constants';
 
 const registerUser = async (userData: any): Promise<any> => {
-  try {
-    const response = await fetch(`${API_URL}/auth/register`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userData),
-    })
+  const url = `${API_URL}/auth/register`;
+  const method = 'POST';
 
-    if (!response.ok) {
-      throw new Error(`Registration failed! Status: ${response.status}`)
-    }
-
-    const data = await response.json()
-    return data
-  } catch (error) {
-    console.error('Error during registration:', error)
-    throw error
-  }
-}
+  return apiCall(url, method, userData);
+};
 
 const loginUser = async (credentials: any): Promise<any> => {
-  try {
-    const response = await fetch(`${API_URL}/auth/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(credentials),
-    })
+  const url = `${API_URL}/auth/login`;
+  const method = 'POST';
 
-    if (!response.ok) {
-      throw new Error(`Login failed! Status: ${response.status}`)
-    }
+  return apiCall(url, method, credentials);
+};
 
-    const data = await response.json()
-    return data
-  } catch (error) {
-    console.error('Error during login:', error)
-    throw error
-  }
-}
-
-export { registerUser, loginUser }
+export { registerUser, loginUser };

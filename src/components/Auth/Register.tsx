@@ -1,22 +1,22 @@
 // Registration.tsx
-import React, { useState, ChangeEvent, FormEvent } from 'react'
-import { registerUser } from '../../apis/auth'
-import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
-import './Auth.css'
+import React, { useState, ChangeEvent, FormEvent } from 'react';
+import { registerUser } from '../../apis/auth';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import './Auth.css';
 interface FormData {
-  username: string
-  password: string
-  fullName: string
-  email: string
-  bio: string
+  username: string;
+  password: string;
+  fullName: string;
+  email: string;
+  bio: string;
 }
 
 interface ApiResponse {
-  [x: string]: any
+  [x: string]: any;
   data: {
-    error: string
-  }
+    error: string;
+  };
 }
 
 const Registration: React.FC = () => {
@@ -26,37 +26,36 @@ const Registration: React.FC = () => {
     fullName: '',
     email: '',
     bio: '',
-  })
-  const [is_saving, setUploading] = useState(false)
-  const navigate = useNavigate()
+  });
+  const [is_saving, setUploading] = useState(false);
+  const navigate = useNavigate();
 
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     setUploading(true);
     try {
-      const response = await registerUser(formData)
-      console.log('Registration successful:', response.message)
-      toast.success('Registration successful')
-      navigate('/login')
-      
-    setUploading(false);
+      const response = await registerUser(formData);
+      console.log('Registration successful:', response.message);
+      toast.success('Registration successful');
+      navigate('/login');
+
+      setUploading(false);
     } catch (error) {
-      
-    setUploading(false);
-      handleRegistrationError(error)
+      setUploading(false);
+      handleRegistrationError(error);
     }
-  }
+  };
 
   const handleRegistrationError = (error: any) => {
-    toast.error('Unexpected registration error')
-    console.error('Unexpected registration error:', error)
-  }
+    toast.error('Unexpected registration error');
+    console.error('Unexpected registration error:', error);
+  };
 
   return (
     <div className="container">
@@ -101,7 +100,7 @@ const Registration: React.FC = () => {
         </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Registration
+export default Registration;

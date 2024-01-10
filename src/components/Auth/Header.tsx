@@ -1,9 +1,9 @@
-import React, { FC } from 'react'
-import { Link } from 'react-router-dom'
-import './Auth.css'
+import React, { FC } from 'react';
+import { Link } from 'react-router-dom';
+import './Auth.css';
 interface HeaderProps {
-  loggedInUserId: string | null // Assuming your user ID is a string
-  logout: () => void
+  loggedInUserId: string | null; // Assuming your user ID is a string
+  logout: () => void;
 }
 
 const Header: FC<HeaderProps> = ({ loggedInUserId, logout }) => {
@@ -41,7 +41,7 @@ const Header: FC<HeaderProps> = ({ loggedInUserId, logout }) => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

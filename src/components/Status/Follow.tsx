@@ -1,17 +1,17 @@
-import React from 'react'
-import { toast } from 'react-toastify'
-import { postComment, likeStatus, followUser } from '../../apis/status'
+import React from 'react';
+import { toast } from 'react-toastify';
+import { postComment, likeStatus, followUser } from '../../apis/status';
 
 interface FollowingList {
-  _id: string
-  followingId: string
+  _id: string;
+  followingId: string;
 }
 
 interface FollowProps {
-  userId: string
-  followingId: string
-  followingList: FollowingList[]
-  refetchStatuses: any
+  userId: string;
+  followingId: string;
+  followingList: FollowingList[];
+  refetchStatuses: any;
 }
 
 const Follow: React.FC<FollowProps> = ({
@@ -20,9 +20,9 @@ const Follow: React.FC<FollowProps> = ({
   followingList,
   refetchStatuses,
 }) => {
-  const isAlreadyFollowing = followingList.some(
-    (item) => item.followingId === followingId,
-  )
+  const isAlreadyFollowing =
+    followingList &&
+    followingList.some((item) => item.followingId === followingId);
 
   return (
     <div>
@@ -40,8 +40,8 @@ const Follow: React.FC<FollowProps> = ({
         </button>
       )}
     </div>
-  )
-}
+  );
+};
 
 const handleFollow = async (
   loggedInUserId: string,
@@ -50,15 +50,15 @@ const handleFollow = async (
 ) => {
   try {
     if (!loggedInUserId || loggedInUserId === '') {
-      console.log(loggedInUserId)
-      toast.error('Please login fist')
-      return false
+      console.log(loggedInUserId);
+      toast.error('Please login fist');
+      return false;
     }
-    await followUser(loggedInUserId, followingId)
-    refetchStatuses()
+    await followUser(loggedInUserId, followingId);
+    refetchStatuses();
   } catch (error) {
-    console.error('Error toggling follow:', error)
+    console.error('Error toggling follow:', error);
   }
-}
+};
 
-export default Follow
+export default Follow;

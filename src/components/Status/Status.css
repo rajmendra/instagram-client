@@ -141,3 +141,61 @@ li {
 .follow-button-container {
   margin-left: auto;
 }
+
+/* Skeleton styles*/
+.skeleton-card {
+  width: 100%;
+  margin-bottom: 2em;
+}
+.skeleton-card .row{
+  display: flex;
+}
+.skeleton-avatar {
+  background: #eee;
+  background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+  border-radius: 5px;
+  background-size: 200% 100%;
+  animation: 1.5s shine linear infinite;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+}
+.skeleton-author {
+  background: #eee;
+  background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+  border-radius: 5px;
+  background-size: 200% 100%;
+  animation: 1.5s shine linear infinite;
+  height: 30px;
+  width: 150px;
+  margin-left: 1rem;
+  border-radius: 6px;
+}
+.skeleton-image {
+  height: 200px;
+  width: 100%;
+  border-radius: 6px;
+  background: #eee;
+  background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+  border-radius: 5px;
+  background-size: 200% 100%;
+  animation: 1.5s shine linear infinite;
+  margin-top: 10px;
+}
+.skeleton-footer {
+  height: 30px;
+  width: 100%;
+  border-radius: 6px;
+  background: #eee;
+  background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+  border-radius: 5px;
+  background-size: 200% 100%;
+  animation: 1.5s shine linear infinite;
+  margin-top: 10px;
+}
+
+@keyframes shine {
+  to {
+    background-position-x: -200%;
+  }
+}

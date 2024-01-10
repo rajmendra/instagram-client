@@ -1,96 +1,96 @@
-import React, { useState, useEffect } from 'react'
-import { toast } from 'react-toastify'
-import { useAuth } from '../Auth/AuthContext'
-import { updateUser, getUserProfile } from '../../apis/user' // Import your API functions
+import React, { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
+import { useAuth } from '../Auth/AuthContext';
+import { updateUser, getUserProfile } from '../../apis/user'; // Import your API functions
 
 export interface EditUser {
-  _id: string
-  username: string
-  fullName: string
-  profilePicture: string
-  email: string
-  bio: string
+  _id: string;
+  username: string;
+  fullName: string;
+  profilePicture: string;
+  email: string;
+  bio: string;
 }
 
 const EditProfile: React.FC = () => {
-  const { loggedInUserId } = useAuth()
+  const { loggedInUserId } = useAuth();
   const [formData, setFormData] = useState({
     username: '',
     fullName: '',
     email: '',
     bio: '',
     profilePicture: '',
-  })
+  });
   const [profilePictureUpload, setProfilePictureUpload] = useState<File | null>(
     null,
-  )
-  const [is_saving, setUploading] = useState(false)
+  );
+  const [is_saving, setUploading] = useState(false);
 
   useEffect(() => {
     const fetchUserProfile = async () => {
-      const userProfile: EditUser = await getUserProfile(loggedInUserId)
+      const userProfile: EditUser = await getUserProfile(loggedInUserId);
       setFormData({
         username: userProfile.username,
         fullName: userProfile.fullName,
         email: userProfile.email,
         bio: userProfile.bio,
         profilePicture: userProfile.profilePicture,
-      })
-    }
+      });
+    };
 
-    fetchUserProfile()
-  }, [loggedInUserId])
+    fetchUserProfile();
+  }, [loggedInUserId]);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      setProfilePictureUpload(e.target.files[0])
+      setProfilePictureUpload(e.target.files[0]);
     }
-  }
+  };
 
   const checkLogin = () => {
     if (!loggedInUserId || loggedInUserId === '') {
-      toast.error('Please login fist')
-      return false
+      toast.error('Please login fist');
+      return false;
     }
-  }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     if (!checkLogin()) {
-      return
+      return;
     }
-    setUploading(true)
+    setUploading(true);
     try {
-      const data = new FormData()
+      const data = new FormData();
 
       // Append text fields to FormData
-      data.append('username', formData.username)
-      data.append('fullName', formData.fullName)
-      data.append('bio', formData.bio)
-      data.append('email', formData.email)
+      data.append('username', formData.username);
+      data.append('fullName', formData.fullName);
+      data.append('bio', formData.bio);
+      data.append('email', formData.email);
 
       if (profilePictureUpload) {
-        data.append('file', profilePictureUpload)
+        data.append('file', profilePictureUpload);
       }
 
       // Now you can use this formData object for your API call
-      await updateUser(loggedInUserId, data)
+      await updateUser(loggedInUserId, data);
 
-      toast.success('Profile updated.')
-      setUploading(false)
+      toast.success('Profile updated.');
+      setUploading(false);
     } catch (error) {
-      console.error('Error updating profile:', error)
+      console.error('Error updating profile:', error);
       // Handle the error (display an error message, etc.)
     }
-  }
+  };
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    })
-  }
+    });
+  };
 
   return (
     <div className="edit-profile-container">
@@ -136,7 +136,7 @@ const EditProfile: React.FC = () => {
         </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default EditProfile
+export default EditProfile;

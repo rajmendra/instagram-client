@@ -1,44 +1,44 @@
 // Login.tsx
-import React, { useState, ChangeEvent, FormEvent } from 'react'
-import { toast } from 'react-toastify'
-import { loginUser } from '../../apis/auth'
-import { useAuth } from './AuthContext'
-import { useNavigate } from 'react-router-dom'
+import React, { useState, ChangeEvent, FormEvent } from 'react';
+import { toast } from 'react-toastify';
+import { loginUser } from '../../apis/auth';
+import { useAuth } from './AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 interface FormData {
-  username: string
-  password: string
+  username: string;
+  password: string;
 }
 
 const Login: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     username: '',
     password: '',
-  })
-  const [is_saving, setLoader] = useState(false)
-  const { loggedInUserId, login, logout } = useAuth()
-  const navigate = useNavigate()
+  });
+  const [is_saving, setLoader] = useState(false);
+  const { loggedInUserId, login, logout } = useAuth();
+  const navigate = useNavigate();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     setLoader(true);
     try {
-      const response = await loginUser(formData)
-      const { userId, token } = response
-      localStorage.setItem('userId', userId)
-      localStorage.setItem('token', token)
+      const response = await loginUser(formData);
+      const { userId, token } = response;
+      localStorage.setItem('userId', userId);
+      localStorage.setItem('token', token);
       login(userId);
       setLoader(false);
-      navigate('/status-list')
+      navigate('/status-list');
     } catch (error) {
       setLoader(false);
-      toast.error('User name and password is not correct.')
+      toast.error('User name and password is not correct.');
     }
-  }
+  };
 
   return (
     <div className="container">
@@ -59,12 +59,12 @@ const Login: React.FC = () => {
           onChange={handleInputChange}
           required
         />
-  <button disabled={is_saving} type="submit">
+        <button disabled={is_saving} type="submit">
           {is_saving ? 'Login in wait...' : 'Login'}
         </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

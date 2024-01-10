@@ -1,39 +1,42 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react'
+import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface AuthContextProps {
-  loggedInUserId: string
-  login: (userId: string) => void
-  logout: () => void
+  loggedInUserId: string;
+  login: (userId: string) => void;
+  logout: () => void;
 }
 
-const AuthContext = createContext<AuthContextProps | undefined>(undefined)
+const AuthContext = createContext<any>(undefined);
 
 interface AuthProviderProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [loggedInUserId, setLoggedInUserId] = useState<string>('')
+  const [loggedInUserId, setLoggedInUserId] = useState<any>(false);
 
   const login = (userId: string) => {
+    console.log('userId', userId);
     setLoggedInUserId(userId)
-  }
+  };
 
   const logout = () => {
-    setLoggedInUserId('')
-  }
-
+    localStorage.removeItem('userId');
+    localStorage.removeItem('token');
+    setLoggedInUserId('');
+  };
+  const userId: string | null = localStorage.getItem('userId');
   return (
-    <AuthContext.Provider value={{ loggedInUserId, login, logout }}>
+    <AuthContext.Provider value={{ loggedInUserId: userId, login, logout }}>
       {children}
     </AuthContext.Provider>
-  )
-}
+  );
+};
 
 export const useAuth = (): AuthContextProps => {
-  const context = useContext(AuthContext)
+  const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider')
+    throw new Error('useAuth must be used within an AuthProvider');
   }
-  return context
-}
+  return context;
+};

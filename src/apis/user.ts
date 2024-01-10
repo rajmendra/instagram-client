@@ -1,60 +1,46 @@
-import { EditUser } from './interfaceDefs'
-import { API_URL } from '../constant';
+import { apiCall } from '../utils';
+import { EditUser } from './userInterfaces';
+import { API_URL } from '../constants';
 
+// Get user profile
 const getUserProfile = async (userId: any): Promise<EditUser> => {
+  const url = `${API_URL}/user/profile/${userId}`;
+
   try {
-    const response = await fetch(`${API_URL}/user/profile/${userId}`)
-
-    if (!response.ok) {
-      // Handle non-successful HTTP responses
-      throw new Error(`HTTP error! Status: ${response.status}`)
-    }
-
-    const data = await response.json() // Extract JSON data
-    return data.user
+    const data = await apiCall(url, 'GET');
+    return data.user;
   } catch (error) {
-    // Handle any other errors that might occur
-    console.error('Error fetching statuses:', error)
-    throw error // Rethrow the error for the caller to handle if needed
+    console.error('Error fetching user profile:', error);
+    throw error;
   }
-}
+};
 
-// Like a status
+// Update user profile
 const updateUser = async (
-  loggedInUserId: String,
+  loggedInUserId: string,
   data: FormData,
 ): Promise<void> => {
+  const url = `${API_URL}/user/profile/${loggedInUserId}`;
+
   try {
-    const response = await fetch(`${API_URL}/user/profile/${loggedInUserId}`, {
-      method: 'PUT',
-      body: data,
-    })
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`)
-    }
+    await apiCall(url, 'PUT', data);
   } catch (error) {
-    console.error('Error liking status:', error)
-    throw error
+    console.error('Error updating user profile:', error);
+    throw error;
   }
-}
+};
 
-const getFollowingList = async (loggedInUserId: String): Promise<any[]> => {
+// Get following list
+const getFollowingList = async (loggedInUserId: string): Promise<any> => {
+  const url = `${API_URL}/follow/${loggedInUserId}/following`;
+
   try {
-    const response = await fetch(
-      `${API_URL}/follow/${loggedInUserId}/following`,
-    )
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`)
-    }
-
-    const data = await response.json() // Extract JSON data
-    return data.followingList
+    const data = await apiCall(url, 'GET');
+    return data.followingList;
   } catch (error) {
-    console.error('Error liking status:', error)
-    throw error
+    console.error('Error fetching following list:', error);
+    throw error;
   }
-}
+};
 
-export { updateUser, getUserProfile, getFollowingList }
+export { updateUser, getUserProfile, getFollowingList };

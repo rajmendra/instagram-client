@@ -1,23 +1,18 @@
-import { Status } from './interfaceDefs'
-import { API_URL } from '../constant';
+import { apiCall } from '../utils';
+import { API_URL } from '../constants';
+import { Status } from './userInterfaces';
 
-const fetchStatus = async (userId: any): Promise<Status[]> => {
+// Fetch statuses
+const fetchStatus = async (userId: any): Promise<any> => {
+  const url = `${API_URL}/status`;
+
   try {
-    const response = await fetch(`${API_URL}/status`)
-
-    if (!response.ok) {
-      // Handle non-successful HTTP responses
-      throw new Error(`HTTP error! Status: ${response.status}`)
-    }
-
-    const data = await response.json() // Extract JSON data
-    return data.statuses
+    return apiCall(url, 'GET');
   } catch (error) {
-    // Handle any other errors that might occur
-    console.error('Error fetching statuses:', error)
-    throw error // Rethrow the error for the caller to handle if needed
+    console.error('Error fetching statuses:', error);
+    throw error;
   }
-}
+};
 
 // Post comment to a status
 const postComment = async (
@@ -25,90 +20,60 @@ const postComment = async (
   statusId: string,
   commentText: string,
 ): Promise<void> => {
-  try {
-    const response = await fetch(
-      `${API_URL}/status/${userId}/comment/${statusId}`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ content: commentText }),
-      },
-    )
+  const url = `${API_URL}/status/${userId}/comment/${statusId}`;
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`)
-    }
+  try {
+    return apiCall(url, 'POST', { content: commentText });
   } catch (error) {
-    console.error('Error posting comment:', error)
-    throw error
+    console.error('Error posting comment:', error);
+    throw error;
   }
-}
+};
 
 // Like a status
 const likeStatus = async (userId: string, statusId: string): Promise<void> => {
+  const url = `${API_URL}/status/${userId}/like/${statusId}`;
+
   try {
-    const response = await fetch(
-      `${API_URL}/status/${userId}/like/${statusId}`,
-      {
-        method: 'POST',
-      },
-    )
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`)
-    }
-  } catch (error) {
-    console.error('Error liking status:', error)
-    throw error
+    return apiCall(url, 'POST');
+  } catch (error:any) {
+    console.log('error.response', error.response.data.message)
+    //console.error('Error liking status:', error);
+    throw error;
   }
-}
+};
 
-// Like a status
+// Post a status
 const postStatus = async (
-  loggedInUserId: String,
+  loggedInUserId: string,
   data: FormData,
 ): Promise<void> => {
+  const url = `${API_URL}/status/${loggedInUserId}`;
+
   try {
-    const response = await fetch(`${API_URL}/status/${loggedInUserId}`, {
-      method: 'POST',
-      body: data,
-    })
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`)
-    }
+    return apiCall(url, 'POST', data);
   } catch (error) {
-    console.error('Error liking status:', error)
-    throw error
+    console.error('Error posting status:', error);
+    throw error;
   }
-}
+};
 
-// Like a status
+// Follow a user
 const followUser = async (
-  followerId: String,
-  followingId: String,
+  followerId: string,
+  followingId: string,
 ): Promise<void> => {
+  const url = `${API_URL}/follow`;
+
   try {
-    const response = await fetch(`${API_URL}/follow`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        followerId,
-        followingId,
-      }),
-    })
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`)
-    }
+    return apiCall(url, 'POST', {
+      followerId,
+      followingId,
+    });
   } catch (error) {
-    console.error('Error liking status:', error)
-    throw error
+    console.error('Error following user:', error);
+    throw error;
   }
-}
+};
 
-export { fetchStatus, likeStatus, postComment, postStatus, followUser }
+export { fetchStatus, likeStatus, postComment, postStatus, followUser };

@@ -1,26 +1,26 @@
-import React, { useEffect } from 'react'
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom'
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import Register from './components/Auth/Register'
-import Header from './components/Auth/Header'
-import Login from './components/Auth/Login'
-import StatusList from './components/Status/StatusList'
-import { useAuth } from './components/Auth/AuthContext'
-import PostStatus from './components/Status/PostStatus'
-import EditProfile from './components/Profile/EditProfile'
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Register from './components/Auth/Register';
+import Header from './components/Auth/Header';
+import Login from './components/Auth/Login';
+import StatusList from './components/Status/StatusList';
+import { useAuth } from './components/Auth/AuthContext';
+import PostStatus from './components/Status/PostStatus';
+import EditProfile from './components/Profile/EditProfile';
 
-import './App.css'
+import './App.css';
 const App: React.FC = () => {
-  const { loggedInUserId, logout, login } = useAuth()
+  const { loggedInUserId, logout, login } = useAuth();
 
   useEffect(() => {
-    const userId: string | null = localStorage.getItem('userId')
-    const token = localStorage.getItem('token')
+    const userId: string | null = localStorage.getItem('userId');
+    const token = localStorage.getItem('token');
     if (userId) {
-      login(userId)
+      login(userId);
     }
-  }, [])
+  }, []);
 
   return (
     <Router>
@@ -40,7 +40,7 @@ const App: React.FC = () => {
       </div>
       <ToastContainer />
     </Router>
-  )
-}
+  );
+};
 
-export default App
+export default App;
