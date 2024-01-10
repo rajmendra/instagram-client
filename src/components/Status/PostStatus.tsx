@@ -31,9 +31,11 @@ const PostStatus: React.FC = () => {
       toast.error('Please login fist');
       return false;
     }
+    return true;
   };
 
   const handleSubmit = async (e: FormEvent) => {
+    console.log(loggedInUserId)
     e.preventDefault();
     if (!checkLogin()) {
       return;
@@ -45,6 +47,8 @@ const PostStatus: React.FC = () => {
     if (file) {
       formData.append('file', file);
     }
+    
+    console.log('postStatus')
     const response = await postStatus(loggedInUserId, formData);
     console.log(response);
     setIsPosting(false);

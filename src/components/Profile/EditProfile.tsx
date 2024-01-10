@@ -52,6 +52,7 @@ const EditProfile: React.FC = () => {
       toast.error('Please login fist');
       return false;
     }
+    return true;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {

@@ -23,7 +23,7 @@ const updateUser = async (
   const url = `${API_URL}/user/profile/${loggedInUserId}`;
 
   try {
-    await apiCall(url, 'PUT', data);
+    await apiCall(url, 'PUT', data, { headers: { "Content-Type": "multipart/form-data" } });
   } catch (error) {
     console.error('Error updating user profile:', error);
     throw error;
