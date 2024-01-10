@@ -14,4 +14,10 @@ const Skeleton: React.FC<any> = () => {
   );
 };
 
-export default Skeleton;
+
+const ImageSkeleton: React.FC<any> = () => {
+  return (
+    <div className="skeleton-image lazy-image"></div>
+  );
+};
+export { Skeleton, ImageSkeleton } 

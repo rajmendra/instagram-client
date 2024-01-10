@@ -1,10 +1,44 @@
+import { QueryFunction } from 'react-query';
 import { apiCall } from '../utils';
 import { API_URL } from '../constants';
 import { Status } from './userInterfaces';
 
+const pageSize = 4
+
+
+interface APIResultsI {
+  results: Status[];
+  offset: number | null;
+}
+
 // Fetch statuses
-const fetchStatus = async (userId: any): Promise<any> => {
-  const url = `${API_URL}/status`;
+const fetchStatus = async (userId:any, page: any = 1, pageSize: any = 10): Promise<any> => {
+  const url = `${API_URL}/status?page=${page}&pageSize=${pageSize}`;
+
+  try {
+    return apiCall(url, 'GET');
+  } catch (error) {
+    console.error('Error fetching statuses:', error);
+    throw error;
+  }
+};
+
+
+const fetchData: QueryFunction<APIResultsI, 'status'> = async ({
+  pageParam,
+}) => {
+  const page = pageParam ? pageParam : 0;
+  const url = `${API_URL}/status?page=${page}&pageSize=${pageSize}`;
+  const data = await apiCall(url, 'GET');
+  return {
+    results: data.statuses,
+    offset: page + pageSize,
+  };
+};
+
+
+const fetchStatusById = async (statusId: any): Promise<any> => {
+  const url = `${API_URL}/status/${statusId}`;
 
   try {
     return apiCall(url, 'GET');
@@ -77,4 +111,4 @@ const followUser = async (
   }
 };
 
-export { fetchStatus, likeStatus, postComment, postStatus, followUser };
+export { fetchStatus, likeStatus, postComment, postStatus, followUser, fetchStatusById, fetchData };

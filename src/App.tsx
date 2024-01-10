@@ -9,8 +9,8 @@ import StatusList from './components/Status/StatusList';
 import { useAuth } from './components/Auth/AuthContext';
 import PostStatus from './components/Status/PostStatus';
 import EditProfile from './components/Profile/EditProfile';
-
 import './App.css';
+
 const App: React.FC = () => {
   const { loggedInUserId, logout, login } = useAuth();
 
@@ -24,11 +24,8 @@ const App: React.FC = () => {
 
   return (
     <Router>
-      <div className="container">
-        <div className="header">
-          <h1>Insta Clone</h1>
-        </div>
         <Header loggedInUserId={loggedInUserId} logout={logout} />
+        <div className="container">
         <Routes>
           <Route path="/" element={<StatusList />} />
           <Route path="/create" element={<Register />} />

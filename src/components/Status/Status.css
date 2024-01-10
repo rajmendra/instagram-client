@@ -74,6 +74,9 @@ li {
   display: flex;
   justify-content: space-between;
 }
+.status-content{
+  padding: 10px 0;
+}
 
 .comment-section {
   margin: 20px auto;
@@ -106,6 +109,7 @@ li {
   cursor: pointer;
 }
 .status-item {
+  align-items: center;
   margin-bottom: 20px;
   border-bottom: 1px solid #18a04c;
 

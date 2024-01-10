@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import Skeleton from './Skeleton';
+import React, { useState, useEffect, useCallback, useMemo, useRef, forwardRef } from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component'
+import { useInfiniteQuery } from 'react-query';
 
-import { fetchStatus } from '../../apis/status';
+
+import { Skeleton } from '../Common/Skeleton';
+import { fetchStatus, fetchData } from '../../apis/status';
 import { getFollowingList } from '../../apis/user';
-import StatusItem from './StatusItem';
+import StatusItem from './StatusItem/StatusItem';
 import { useAuth } from './../Auth/AuthContext';
 import { Status } from '../../apis/userInterfaces';
 
@@ -13,15 +16,16 @@ const StatusList: React.FC = () => {
   const [loading, setLoader] = useState(false);
   const { loggedInUserId } = useAuth();
 
-  const fetchStatuses = async () => {
-    setLoader(true);
+  const fetchStatuses = async (showLoader: boolean = true) => {
+    if (showLoader) setLoader(true);
+  
     try {
       const response = await fetchStatus(loggedInUserId);
       setStatuses(response?.statuses);
-      setLoader(false);
     } catch (error) {
-      setLoader(false);
       console.error('Error fetching statuses:', error);
+    } finally {
+      if (showLoader) setLoader(false);
     }
   };
 
@@ -37,35 +41,54 @@ const StatusList: React.FC = () => {
   };
 
   useEffect(() => {
-    fetchStatuses();
     getFollowingListUser();
   }, []);
 
-  const refetchStatuses = () => {
-    // Function to refetch statuses
-    fetchStatuses();
+
+  const { data, error, fetchNextPage, hasNextPage, isFetching, isLoading } =
+    useInfiniteQuery('status', fetchData, {
+      getNextPageParam: (lastPage, pages) => lastPage.offset,
+    });
+
+    const flattenedData = useMemo(
+      () => (data ? data?.pages.flatMap(item => item.results) : []),
+      [data]
+    );
+    
+  const refetchFollowers = () => {
     getFollowingListUser();
   };
-  if (loading) {
+  if (isLoading) {
     return (
-      <p>
-        <Skeleton count={3} />
-      </p>
+      <div>
+        <Skeleton/>
+        <Skeleton/>
+        <Skeleton/>
+      </div>
     );
   }
 
-  return (
-    <div className="status-list">
-      {statuses.map((status) => (
+  return (<InfiniteScroll
+    dataLength={flattenedData.length}
+    next={fetchNextPage}
+    hasMore={!!hasNextPage}
+    loader={<Skeleton/>}
+    endMessage={
+      <p style={{ textAlign: 'center' }}>
+        <b>Yay! You have seen it all</b>
+      </p>
+    }
+  >
+    {flattenedData.map((status, i) => (
         <StatusItem
           followers={followers}
           key={status._id}
           status={status}
-          refetchStatuses={refetchStatuses}
+          refetchStatuses={fetchStatuses}
+          refetchFollowers={refetchFollowers}
         />
       ))}
-    </div>
-  );
+  </InfiniteScroll>);
 };
 
 export default StatusList;

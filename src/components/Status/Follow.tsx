@@ -11,14 +11,14 @@ interface FollowProps {
   userId: string;
   followingId: string;
   followingList: FollowingList[];
-  refetchStatuses: any;
+  refetchFollowers: any;
 }
 
 const Follow: React.FC<FollowProps> = ({
   userId,
   followingId,
   followingList,
-  refetchStatuses,
+  refetchFollowers,
 }) => {
   const isAlreadyFollowing =
     followingList &&
@@ -28,13 +28,13 @@ const Follow: React.FC<FollowProps> = ({
     <div>
       {isAlreadyFollowing ? (
         <button
-          onClick={() => handleFollow(userId, followingId, refetchStatuses)}
+          onClick={() => handleFollow(userId, followingId, refetchFollowers)}
         >
           Unfollow
         </button>
       ) : (
         <button
-          onClick={() => handleFollow(userId, followingId, refetchStatuses)}
+          onClick={() => handleFollow(userId, followingId, refetchFollowers)}
         >
           Follow
         </button>
