@@ -17,7 +17,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const login = (userId: string) => {
     console.log('userId', userId);
-    setLoggedInUserId(userId)
+    setLoggedInUserId(userId);
   };
 
   const logout = () => {

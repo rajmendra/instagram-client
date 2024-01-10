@@ -35,7 +35,7 @@ const PostStatus: React.FC = () => {
   };
 
   const handleSubmit = async (e: FormEvent) => {
-    console.log(loggedInUserId)
+    console.log(loggedInUserId);
     e.preventDefault();
     if (!checkLogin()) {
       return;
@@ -47,8 +47,8 @@ const PostStatus: React.FC = () => {
     if (file) {
       formData.append('file', file);
     }
-    
-    console.log('postStatus')
+
+    console.log('postStatus');
     const response = await postStatus(loggedInUserId, formData);
     console.log(response);
     setIsPosting(false);

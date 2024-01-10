@@ -16,7 +16,6 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const userId: string | null = localStorage.getItem('userId');
-    const token = localStorage.getItem('token');
     if (userId) {
       login(userId);
     }
@@ -24,8 +23,8 @@ const App: React.FC = () => {
 
   return (
     <Router>
-        <Header loggedInUserId={loggedInUserId} logout={logout} />
-        <div className="container">
+      <Header loggedInUserId={loggedInUserId} logout={logout} />
+      <div className="container">
         <Routes>
           <Route path="/" element={<StatusList />} />
           <Route path="/create" element={<Register />} />

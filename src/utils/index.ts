@@ -11,8 +11,8 @@ const apiCall = async (
       method,
       data,
       headers: {
-        'Content-Type': 'application/json',
-        ...config.headers, // Override default headers with provided headers
+        'auth-token': localStorage.getItem('token'),
+        'Content-Type': config?.headers?.content_type || 'application/json',
       },
       ...config,
     });

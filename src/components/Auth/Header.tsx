@@ -11,9 +11,9 @@ const Header: FC<HeaderProps> = ({ loggedInUserId, logout }) => {
   return (
     <div>
       <div className="menu-container">
-      <div className="header">
-        <h1>Insta Clone</h1>
-      </div>
+        <div className="header">
+          <h1>Insta Clone</h1>
+        </div>
         <div className="row">
           {!loggedInUserId && (
             <>

@@ -1,6 +1,6 @@
 import React from 'react';
 import PlaceHolder from '../../assets/noimg.jpg';
-import './Common.css'
+import './Common.css';
 
 const LazyImage: React.FC<any> = ({ src, alt }) => (
   <img

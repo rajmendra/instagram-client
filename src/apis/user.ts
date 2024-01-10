@@ -1,9 +1,8 @@
 import { apiCall } from '../utils';
-import { EditUser } from './userInterfaces';
 import { API_URL } from '../constants';
 
 // Get user profile
-const getUserProfile = async (userId: any): Promise<EditUser> => {
+const getUserProfile = async (userId: any): Promise<any> => {
   const url = `${API_URL}/user/profile/${userId}`;
 
   try {
@@ -23,7 +22,9 @@ const updateUser = async (
   const url = `${API_URL}/user/profile/${loggedInUserId}`;
 
   try {
-    await apiCall(url, 'PUT', data, { headers: { "Content-Type": "multipart/form-data" } });
+    await apiCall(url, 'PUT', data, {
+      headers: { content_type: 'multipart/form-data' },
+    });
   } catch (error) {
     console.error('Error updating user profile:', error);
     throw error;

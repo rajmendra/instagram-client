@@ -9,11 +9,11 @@ import { AuthProvider } from './components/Auth/AuthContext';
 const queryClient = new QueryClient();
 ReactDOM.render(
   <QueryClientProvider client={queryClient}>
-  <React.StrictMode>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
-  </React.StrictMode>
+    <React.StrictMode>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </React.StrictMode>
   </QueryClientProvider>,
   document.getElementById('root'),
 );

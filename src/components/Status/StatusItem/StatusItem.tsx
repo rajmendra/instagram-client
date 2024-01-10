@@ -1,20 +1,19 @@
 import React, { useState, memo } from 'react';
 import { toast } from 'react-toastify';
 
-import { postComment, likeStatus, followUser } from '../../../apis/status';
+import { postComment, likeStatus } from '../../../apis/status';
 import { useAuth } from '../../Auth/AuthContext';
-import 'video-react/dist/video-react.css';
-import { Status } from '../../../apis/userInterfaces';
 import CommentList from './CommentList';
 import ContentSection from './ContentSection';
 import UserInfo from './UserInfo';
+import { Status } from '../../../interface/status-interfaces';
+
 interface StatusItemProps {
   status: Status;
-  refetchStatuses: (id: any) => void; 
+  refetchStatuses: (id: any) => void;
   refetchFollowers: () => void;
   followers: any;
 }
-
 
 const ActionButton: React.FC<any> = ({ handleLikeStatus, status }) => (
   <div className="status-actions">
@@ -24,23 +23,22 @@ const ActionButton: React.FC<any> = ({ handleLikeStatus, status }) => (
   </div>
 );
 
-
 const StatusItem: React.FC<StatusItemProps> = ({
   status,
   refetchStatuses,
-  refetchFollowers, 
+  refetchFollowers,
   followers,
 }) => {
   const [newComment, setNewComment] = useState('');
   const [showAllComments, setShowAllComments] = useState(false);
-  const { loggedInUserId, login, logout } = useAuth();
+  const { loggedInUserId } = useAuth();
 
   const handleAddComment = async () => {
     try {
       if (!checkLogin() || !newComment.trim()) {
         return;
       }
-  
+
       await postComment(loggedInUserId, status._id, newComment);
       setNewComment('');
       refetchStatuses(false);
@@ -57,11 +55,12 @@ const StatusItem: React.FC<StatusItemProps> = ({
       }
       await likeStatus(loggedInUserId, status._id);
       refetchStatuses(false);
-    } catch (error:any) {
+    } catch (error: any) {
       toast.error(error?.response?.data?.error);
       console.error('Error liking status:', error.message);
     }
   };
+
   const checkLogin = () => {
     if (!loggedInUserId || loggedInUserId === '') {
       toast.error('Please log in first');

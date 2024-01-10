@@ -1,10 +1,9 @@
 import { QueryFunction } from 'react-query';
 import { apiCall } from '../utils';
 import { API_URL } from '../constants';
-import { Status } from './userInterfaces';
+import { Status } from '../interface/status-interfaces';
 
-const pageSize = 4
-
+const pageSize = 5;
 
 interface APIResultsI {
   results: Status[];
@@ -12,7 +11,11 @@ interface APIResultsI {
 }
 
 // Fetch statuses
-const fetchStatus = async (userId:any, page: any = 1, pageSize: any = 10): Promise<any> => {
+const fetchStatus = async (
+  userId: any,
+  page: any = 1,
+  pageSize: any = 10,
+): Promise<any> => {
   const url = `${API_URL}/status?page=${page}&pageSize=${pageSize}`;
 
   try {
@@ -22,7 +25,6 @@ const fetchStatus = async (userId:any, page: any = 1, pageSize: any = 10): Promi
     throw error;
   }
 };
-
 
 const fetchData: QueryFunction<APIResultsI, 'status'> = async ({
   pageParam,
@@ -35,7 +37,6 @@ const fetchData: QueryFunction<APIResultsI, 'status'> = async ({
     offset: page + pageSize,
   };
 };
-
 
 const fetchStatusById = async (statusId: any): Promise<any> => {
   const url = `${API_URL}/status/${statusId}`;
@@ -70,8 +71,8 @@ const likeStatus = async (userId: string, statusId: string): Promise<void> => {
 
   try {
     return apiCall(url, 'POST');
-  } catch (error:any) {
-    console.log('error.response', error.response.data.message)
+  } catch (error: any) {
+    console.log('error.response', error.response.data.message);
     //console.error('Error liking status:', error);
     throw error;
   }
@@ -86,7 +87,9 @@ const postStatus = async (
 
   try {
     console.log('data', data);
-    return apiCall(url, 'POST', data, { headers: { "Content-Type": "multipart/form-data" } });
+    return apiCall(url, 'POST', data, {
+      headers: { content_type: 'multipart/form-data' },
+    });
   } catch (error) {
     console.error('Error posting status:', error);
     throw error;
@@ -111,4 +114,12 @@ const followUser = async (
   }
 };
 
-export { fetchStatus, likeStatus, postComment, postStatus, followUser, fetchStatusById, fetchData };
+export {
+  fetchStatus,
+  likeStatus,
+  postComment,
+  postStatus,
+  followUser,
+  fetchStatusById,
+  fetchData,
+};

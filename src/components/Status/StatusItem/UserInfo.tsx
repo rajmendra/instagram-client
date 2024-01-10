@@ -1,5 +1,5 @@
-
 import Follow from '../Follow';
+
 const UserInfo: React.FC<any> = ({
   status,
   loggedInUserId,
@@ -27,4 +27,5 @@ const UserInfo: React.FC<any> = ({
     </div>
   </div>
 );
+
 export default UserInfo;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { toast } from 'react-toastify';
-import { postComment, likeStatus, followUser } from '../../apis/status';
+import { followUser } from '../../apis/status';
 
 interface FollowingList {
   _id: string;
@@ -20,25 +20,17 @@ const Follow: React.FC<FollowProps> = ({
   followingList,
   refetchFollowers,
 }) => {
-  const isAlreadyFollowing =
-    followingList &&
-    followingList.some((item) => item.followingId === followingId);
+  const isAlreadyFollowing = followingList.some(
+    (item) => item.followingId === followingId,
+  );
 
   return (
     <div>
-      {isAlreadyFollowing ? (
-        <button
-          onClick={() => handleFollow(userId, followingId, refetchFollowers)}
-        >
-          Unfollow
-        </button>
-      ) : (
-        <button
-          onClick={() => handleFollow(userId, followingId, refetchFollowers)}
-        >
-          Follow
-        </button>
-      )}
+      <button
+        onClick={() => handleFollow(userId, followingId, refetchFollowers)}
+      >
+        {isAlreadyFollowing ? 'Unfollow' : 'Follow'}
+      </button>
     </div>
   );
 };
@@ -51,7 +43,7 @@ const handleFollow = async (
   try {
     if (!loggedInUserId || loggedInUserId === '') {
       console.log(loggedInUserId);
-      toast.error('Please login fist');
+      toast.error('Please login first');
       return false;
     }
     await followUser(loggedInUserId, followingId);

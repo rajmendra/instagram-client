@@ -1,5 +1,5 @@
-
 import CommentItem from './CommentItem';
+
 const CommentList: React.FC<any> = ({
   status,
   showAllComments,
@@ -32,4 +32,5 @@ const CommentList: React.FC<any> = ({
     </div>
   </div>
 );
+
 export default CommentList;
