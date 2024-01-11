@@ -1,7 +1,7 @@
-// Login.tsx
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 import { loginUser } from '../../apis/auth'; 
 import { useAuth } from './AuthContext';
@@ -31,8 +31,8 @@ const Login: React.FC = () => {
     try {
       const response = await loginUser(formData);
       const { userId, token } = response;
-      localStorage.setItem('userId', userId);
-      localStorage.setItem('token', token);
+      Cookies.set('userId', userId);
+      Cookies.set('token', token);
       login(userId);
       setLoader(false);
       navigate('/status-list');

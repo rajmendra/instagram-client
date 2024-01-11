@@ -16,6 +16,7 @@
     "date-fns": "^3.2.0",
     "dotenv": "^16.3.1",
     "imagekitio-react": "^3.0.0",
+    "js-cookie": "^3.0.5",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.2",
     "react-dom": "^18.2.0",
@@ -57,6 +58,7 @@
     ]
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "prettier": "^3.1.1"
   }
 }

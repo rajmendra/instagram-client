@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Cookies from 'js-cookie';
+
 import Register from './components/Auth/Register';
 import Header from './components/Common/Header';
 import Login from './components/Auth/Login';
@@ -16,7 +18,7 @@ import './App.css';
 const App: React.FC = () => {
   const { loggedInUserId, userProfile, setUser, logout, login } = useAuth();
 
-  const userId: string | null = localStorage.getItem('userId');
+  const userId: string | undefined = Cookies.get('userId');
   useEffect(() => {
     const fetchUserProfile = async () => {
       const userProfile: UserProfile = await getUserProfile(userId);

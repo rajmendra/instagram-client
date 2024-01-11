@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
+import Cookies from 'js-cookie';
 import { UserProfile } from '../../interface/user-interfaces';
 interface AuthContextProps {
   loggedInUserId: string;
@@ -29,11 +30,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const logout = () => {
-    localStorage.removeItem('userId');
-    localStorage.removeItem('token');
+    Cookies.remove('userId');
+    Cookies.remove('token');
     setLoggedInUserId(false);
   };
-  const userId: string | null = localStorage.getItem('userId');
+  const userId: string | undefined =  Cookies.get('userId');;
   return (
     <AuthContext.Provider
       value={{ loggedInUserId: userId, userProfile, login, logout, setUser }}
