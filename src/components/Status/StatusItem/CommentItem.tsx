@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { formatDistanceToNow } from 'date-fns';
-import { IKImage } from 'imagekitio-react';
-const urlEndpoint = 'https://ik.imagekit.io/j5laypcak';
+const LazyImage = lazy(() => import('../../Common/LazyImage'));
 
 const CommentItem: React.FC<any> = ({ comment, index }) => (
   <li key={index}>
@@ -10,15 +9,9 @@ const CommentItem: React.FC<any> = ({ comment, index }) => (
         <span
           className="profile-picture"
           style={{ width: '30px', height: '30px' }}
-        >
-          <IKImage
-            urlEndpoint={urlEndpoint}
-            alt="User"
-            loading="lazy"
-            src={comment.userId?.profilePicture}
-            className="profile-picture-comment"
-            width="30"
-          />
+        ><Suspense>
+        <LazyImage src={comment.userId?.profilePicture} width={30} alt="User" className={"profile-picture-comment"} />
+      </Suspense>
         </span>
       </div>
       <div className="comment-col comment">

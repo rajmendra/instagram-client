@@ -93,9 +93,7 @@ const PostStatus: React.FC = () => {
             />
           </div>
         )}
-        <button disabled={isPosting} type="submit">
-          {isPosting ? 'Posting...' : 'Post'}
-        </button>
+        <Button is_saving={isPosting} saving_text={"Posting..."} text="Post" />
       </form>
     </div>
   );

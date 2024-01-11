@@ -1,5 +1,6 @@
+import React, { Suspense, lazy } from 'react';
 import Follow from '../Follow';
-
+const LazyImage = lazy(() => import('../../Common/LazyImage'));
 const UserInfo: React.FC<any> = ({
   status,
   loggedInUserId,
@@ -8,11 +9,9 @@ const UserInfo: React.FC<any> = ({
 }) => (
   <div className="user-info">
     <span className="profile-picture" style={{ width: '80px', height: '80px' }}>
-      <img
-        src={status.postedBy.profilePicture}
-        alt="User"
-        className="profile-picture-post"
-      />
+    <Suspense>
+              <LazyImage src={status.postedBy.profilePicture} alt="User" />
+            </Suspense>
     </span>
     <div className="user-details">
       <h2>{status.postedBy.fullName}</h2>
