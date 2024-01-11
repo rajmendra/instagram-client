@@ -4,7 +4,7 @@ import { Status } from '../interface/status-interfaces';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-const pageSize = 50;
+const pageSize = 10;
 
 interface APIResultsI {
   results: Status[];
