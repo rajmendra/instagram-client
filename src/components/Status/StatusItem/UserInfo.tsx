@@ -7,11 +7,13 @@ const UserInfo: React.FC<any> = ({
   refetchFollowers,
 }) => (
   <div className="user-info">
+     <span className="profile-picture" style={{width: "80px", height: "80px"}}>
     <img
       src={status.postedBy.profilePicture}
       alt="User"
       className="profile-picture-post"
     />
+    </span>
     <div className="user-details">
       <h2>{status.postedBy.fullName}</h2>
     </div>

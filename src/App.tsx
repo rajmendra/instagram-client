@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Register from './components/Auth/Register';
-import Header from './components/Auth/Header';
+import Header from './components/Common/Header';
 import Login from './components/Auth/Login';
 import StatusList from './components/Status/StatusList';
 import { useAuth } from './components/Auth/AuthContext';

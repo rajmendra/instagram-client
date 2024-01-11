@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Suspense, lazy } from 'react';
-import { Player } from 'video-react';
+import { Player, BigPlayButton } from 'video-react';
 import 'video-react/dist/video-react.css';
 import { ImageSkeleton } from '../../Common/Skeleton';
 
@@ -26,8 +26,8 @@ const ContentSection: React.FC<any> = React.memo(
       case 'video':
         return (
           <div className="status-content">
-            <Player>
-              <source src={content} />
+            <Player preload="auto" src={content}>
+            < BigPlayButton position="center" />
             </Player>
           </div>
         );

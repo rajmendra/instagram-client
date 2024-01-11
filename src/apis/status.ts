@@ -1,9 +1,11 @@
 import { QueryFunction } from 'react-query';
 import { apiCall } from '../utils';
-import { API_URL } from '../constants';
 import { Status } from '../interface/status-interfaces';
 
-const pageSize = 5;
+
+const API_URL = process.env.REACT_APP_API_URL;
+
+const pageSize = 10;
 
 interface APIResultsI {
   results: Status[];

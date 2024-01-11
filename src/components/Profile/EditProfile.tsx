@@ -97,6 +97,17 @@ const EditProfile: React.FC = () => {
     <div className="edit-profile-container">
       <h2>Edit Profile</h2>
       <form onSubmit={handleSubmit}>
+      <label>Profile Picture:</label>
+        {formData.profilePicture && (
+          <span className="profile-picture" style={{width: "250px", height: "250px"}}>
+          <img
+            src={formData.profilePicture}
+            alt="Profile"
+          /></span>
+        )}
+        <input type="file" accept="image/*" onChange={handleImageChange} />
+
+
         <label>Username:</label>
         <input
           type="text"
@@ -120,18 +131,10 @@ const EditProfile: React.FC = () => {
           name="bio"
           value={formData.bio}
           onChange={handleInputChange}
+          required
         ></textarea>
 
-        <label>Profile Picture:</label>
-        {formData.profilePicture && (
-          <img
-            src={formData.profilePicture}
-            alt="Profile"
-            className="profile-picture-edit"
-          />
-        )}
-        <input type="file" accept="image/*" onChange={handleImageChange} />
-
+       
         <button disabled={is_saving} type="submit">
           {is_saving ? 'Saving...' : 'Save Changes'}
         </button>

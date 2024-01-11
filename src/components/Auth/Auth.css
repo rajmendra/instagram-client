@@ -6,35 +6,6 @@
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.menu-container {
-  width: 200px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  background-color: #f1f1f1;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-@media (max-width: 800px) {
-  .menu-container {
-    position: fixed;
-    top: auto;
-    bottom: 0;
-  }
-}
-
-.column {
-  margin-bottom: 15px;
-}
-
-.column a {
-  text-decoration: none;
-}
-h2 {
-  text-align: center;
-  color: #333;
-}
 
 form {
   display: flex;

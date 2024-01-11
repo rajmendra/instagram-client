@@ -1,5 +1,6 @@
 import { apiCall } from '../utils';
-import { API_URL } from '../constants';
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 const registerUser = async (userData: any): Promise<any> => {
   const url = `${API_URL}/auth/register`;
