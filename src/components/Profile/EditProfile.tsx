@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { useAuth } from '../Auth/AuthContext';
-import { updateUser, getUserProfile } from '../../apis/user'; // Import your API functions
+import { useNavigate } from 'react-router-dom';
 
+import { useAuth } from '../Auth/AuthContext';
+import { updateUser, getUserProfile } from '../../apis/user';
+import Button from '../Common/Button'; 
 export interface EditUser {
   _id: string;
   username: string;
@@ -13,7 +15,7 @@ export interface EditUser {
 }
 
 const EditProfile: React.FC = () => {
-  const { loggedInUserId } = useAuth();
+  const { loggedInUserId, setUser } = useAuth();
   const [formData, setFormData] = useState({
     username: '',
     fullName: '',
@@ -25,19 +27,21 @@ const EditProfile: React.FC = () => {
     null,
   );
   const [is_saving, setUploading] = useState(false);
+  const navigate = useNavigate();
+
+  const fetchUserProfile = async () => {
+    const userProfile: any = await getUserProfile(loggedInUserId);
+    setUser(userProfile);
+    setFormData({
+      username: userProfile.username,
+      fullName: userProfile.fullName,
+      email: userProfile.email,
+      bio: userProfile.bio,
+      profilePicture: userProfile.profilePicture,
+    });
+  };
 
   useEffect(() => {
-    const fetchUserProfile = async () => {
-      const userProfile: EditUser = await getUserProfile(loggedInUserId);
-      setFormData({
-        username: userProfile.username,
-        fullName: userProfile.fullName,
-        email: userProfile.email,
-        bio: userProfile.bio,
-        profilePicture: userProfile.profilePicture,
-      });
-    };
-
     fetchUserProfile();
   }, [loggedInUserId]);
 
@@ -78,7 +82,9 @@ const EditProfile: React.FC = () => {
       await updateUser(loggedInUserId, data);
 
       toast.success('Profile updated.');
+      fetchUserProfile();
       setUploading(false);
+      navigate('/');
     } catch (error) {
       console.error('Error updating profile:', error);
       // Handle the error (display an error message, etc.)
@@ -97,16 +103,16 @@ const EditProfile: React.FC = () => {
     <div className="edit-profile-container">
       <h2>Edit Profile</h2>
       <form onSubmit={handleSubmit}>
-      <label>Profile Picture:</label>
+        <label>Profile Picture:</label>
         {formData.profilePicture && (
-          <span className="profile-picture" style={{width: "250px", height: "250px"}}>
-          <img
-            src={formData.profilePicture}
-            alt="Profile"
-          /></span>
+          <span
+            className="profile-picture"
+            style={{ width: '250px', height: '250px' }}
+          >
+            <img src={formData.profilePicture} alt="Profile" />
+          </span>
         )}
         <input type="file" accept="image/*" onChange={handleImageChange} />
-
 
         <label>Username:</label>
         <input
@@ -134,10 +140,7 @@ const EditProfile: React.FC = () => {
           required
         ></textarea>
 
-       
-        <button disabled={is_saving} type="submit">
-          {is_saving ? 'Saving...' : 'Save Changes'}
-        </button>
+  <Button is_saving={is_saving} text="Save Changes" saving_text="Updating..."/>
       </form>
     </div>
   );

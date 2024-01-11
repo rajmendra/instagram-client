@@ -4,6 +4,7 @@ import { registerUser } from '../../apis/auth';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import './Auth.css';
+import Button from '../Common/Button'; 
 interface FormData {
   username: string;
   password: string;
@@ -58,7 +59,7 @@ const Registration: React.FC = () => {
   };
 
   return (
-    <div className="container">
+    <div>
       <h2>Registration</h2>
       <form onSubmit={handleSubmit}>
         <label>Username:</label>
@@ -95,9 +96,7 @@ const Registration: React.FC = () => {
 
         <label>Bio:</label>
         <textarea name="bio" onChange={handleInputChange}></textarea>
-        <button disabled={is_saving} type="submit">
-          {is_saving ? 'Registering...' : 'Register'}
-        </button>
+          <Button is_saving={is_saving} text="Register" saving_text="Saving..." />
       </form>
     </div>
   );

@@ -1,4 +1,4 @@
-import { UserProfile } from "./user-interfaces";
+import { UserProfile } from './user-interfaces';
 export interface Status {
   _id: string;
   content: string;

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import './index.css';
 import { AuthProvider } from './components/Auth/AuthContext';

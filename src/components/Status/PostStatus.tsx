@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { postStatus } from '../../apis/status';
 import './Status.css';
 import { useAuth } from './../Auth/AuthContext';
+import Button from '../Common/Button'; 
 
 const PostStatus: React.FC = () => {
   const [statusContent, setStatusContent] = useState('');

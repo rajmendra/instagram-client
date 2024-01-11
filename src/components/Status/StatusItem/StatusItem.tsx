@@ -10,7 +10,7 @@ import { Status } from '../../../interface/status-interfaces';
 
 interface StatusItemProps {
   status: Status;
-  refetchStatuses: (id: any) => void;
+  refetchStatuses: (value: any) => void;
   refetchFollowers: () => void;
   followers: any;
 }
@@ -18,8 +18,8 @@ interface StatusItemProps {
 const ActionButton: React.FC<any> = ({ handleLikeStatus, status }) => (
   <div className="status-actions">
     <button onClick={handleLikeStatus}>Like</button>
-    <div>Likes: {status.likes.length}</div>
-    <div>Comments: {status.comments.length}</div>
+    <div>Likes: {status.totalLikes}</div>
+    <div>Comments: {status.totalComments}</div>
   </div>
 );
 

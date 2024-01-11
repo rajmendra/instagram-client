@@ -27,7 +27,7 @@ const ContentSection: React.FC<any> = React.memo(
         return (
           <div className="status-content">
             <Player preload="auto" src={content}>
-            < BigPlayButton position="center" />
+              <BigPlayButton position="center" />
             </Player>
           </div>
         );

@@ -2,9 +2,10 @@ export interface UserProfile {
   _id: string;
   username: string;
   fullName: string;
-  profilePicture: null | File;
+  profilePicture: null | string;
   email: string;
   bio: string;
+  followerCount: number;
 }
 
 export interface Comment {

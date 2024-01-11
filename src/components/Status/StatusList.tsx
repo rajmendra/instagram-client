@@ -47,20 +47,28 @@ const StatusList: React.FC = () => {
     [data],
   );
 
-  const refetchFollowers = () => {
-    getFollowingListUser();
-  };
-
   const refetchStatuses = async (showLoader: boolean = true) => {
     refetch();
   };
 
-  if (!flattenedData.length) {
+  const refetchFollowers = () => {
+    refetch();
+    getFollowingListUser();
+  };
+
+  if (isLoading) {
     return (
       <div>
         <Skeleton />
         <Skeleton />
         <Skeleton />
+      </div>
+    );
+  }
+  if (!isLoading && !flattenedData.length) {
+    return (
+      <div style={{ textAlign: 'center' }}>
+        <b>No Status</b>
       </div>
     );
   }
@@ -70,7 +78,7 @@ const StatusList: React.FC = () => {
       dataLength={flattenedData.length}
       next={fetchNextPage}
       hasMore={!!hasNextPage}
-      loader={<Skeleton />}
+      loader={hasNextPage ? <Skeleton /> : <div />}
       endMessage={
         <div style={{ textAlign: 'center' }}>
           <b>Yay! You have seen it all</b>

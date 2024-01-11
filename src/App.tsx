@@ -9,21 +9,33 @@ import StatusList from './components/Status/StatusList';
 import { useAuth } from './components/Auth/AuthContext';
 import PostStatus from './components/Status/PostStatus';
 import EditProfile from './components/Profile/EditProfile';
+import { UserProfile } from './interface/user-interfaces';
+import { getUserProfile } from './apis/user';
 import './App.css';
 
 const App: React.FC = () => {
-  const { loggedInUserId, logout, login } = useAuth();
+  const { loggedInUserId, userProfile, setUser, logout, login } = useAuth();
 
+  const userId: string | null = localStorage.getItem('userId');
   useEffect(() => {
-    const userId: string | null = localStorage.getItem('userId');
-    if (userId) {
-      login(userId);
+    const fetchUserProfile = async () => {
+      const userProfile: UserProfile = await getUserProfile(userId);
+      setUser(userProfile);
+      login(userProfile._id);
+    };
+
+    if (userId && userId != null) {
+      fetchUserProfile();
     }
-  }, []);
+  }, [userId]);
 
   return (
     <Router>
-      <Header loggedInUserId={loggedInUserId} logout={logout} />
+      <Header
+        loggedInUserId={loggedInUserId}
+        userProfile={userProfile}
+        logout={logout}
+      />
       <div className="container">
         <Routes>
           <Route path="/" element={<StatusList />} />

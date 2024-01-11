@@ -4,10 +4,6 @@
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
@@ -141,6 +137,13 @@ li {
   display: flex;
   flex-direction: column;
 }
+.user-details h2 {
+  margin-bottom: 0px;
+}
+.user-details div {
+  color: #888;
+  font-size: 12px;
+}
 
 .follow-button-container {
   margin-left: auto;
@@ -196,6 +199,24 @@ li {
   background-size: 200% 100%;
   animation: 1.5s shine linear infinite;
   margin-top: 10px;
+}
+
+.comment-row {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+.comment-col {
+  font-size: smaller;
+  display: table-cell;
+  vertical-align: middle;
+}
+.comment-col:first-child {
+  width: 15%;
+  padding-right: 10px;
+}
+.comment-col:nth-child(2) {
+  width: 85%;
 }
 
 @keyframes shine {

@@ -13,7 +13,7 @@ const apiCall = async (
       headers: {
         'auth-token': localStorage.getItem('token'),
         'Content-Type': config?.headers?.content_type || 'application/json',
-      }
+      },
     });
 
     return response.data;

@@ -1,9 +1,11 @@
 // Login.tsx
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { toast } from 'react-toastify';
-import { loginUser } from '../../apis/auth';
-import { useAuth } from './AuthContext';
 import { useNavigate } from 'react-router-dom';
+
+import { loginUser } from '../../apis/auth'; 
+import { useAuth } from './AuthContext';
+import Button from '../Common/Button'; 
 
 interface FormData {
   username: string;
@@ -41,7 +43,7 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="container">
+    <div>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <label>Username:</label>
@@ -59,9 +61,7 @@ const Login: React.FC = () => {
           onChange={handleInputChange}
           required
         />
-        <button disabled={is_saving} type="submit">
-          {is_saving ? 'Login in wait...' : 'Login'}
-        </button>
+        <Button is_saving={is_saving} text="Login" saving_text="Login in..."  />
       </form>
     </div>
   );

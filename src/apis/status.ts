@@ -2,10 +2,9 @@ import { QueryFunction } from 'react-query';
 import { apiCall } from '../utils';
 import { Status } from '../interface/status-interfaces';
 
-
 const API_URL = process.env.REACT_APP_API_URL;
 
-const pageSize = 10;
+const pageSize = 50;
 
 interface APIResultsI {
   results: Status[];
