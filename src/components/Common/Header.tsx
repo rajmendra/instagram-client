@@ -27,7 +27,7 @@ const Header: FC<HeaderProps> = ({ userProfile, loggedInUserId, logout }) => {
           <div className="nav">
             {profilePicture && (
               <span
-                className="profile-picture"
+                className="profile-picture-side"
                 style={{ width: '150px', height: '150px' }}
               >
                 <span>

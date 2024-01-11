@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useAuth } from '../Auth/AuthContext';
 import { updateUser, getUserProfile } from '../../apis/user';
-import Button from '../Common/Button'; 
+import Button from '../Common/Button';
 export interface EditUser {
   _id: string;
   username: string;
@@ -140,7 +140,11 @@ const EditProfile: React.FC = () => {
           required
         ></textarea>
 
-  <Button is_saving={is_saving} text="Save Changes" saving_text="Updating..."/>
+        <Button
+          is_saving={is_saving}
+          text="Save Changes"
+          saving_text="Updating..."
+        />
       </form>
     </div>
   );

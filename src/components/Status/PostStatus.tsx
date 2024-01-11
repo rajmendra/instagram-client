@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { postStatus } from '../../apis/status';
 import './Status.css';
 import { useAuth } from './../Auth/AuthContext';
-import Button from '../Common/Button'; 
+import Button from '../Common/Button';
 
 const PostStatus: React.FC = () => {
   const [statusContent, setStatusContent] = useState('');
@@ -49,9 +49,7 @@ const PostStatus: React.FC = () => {
       formData.append('file', file);
     }
 
-    console.log('postStatus');
     const response = await postStatus(loggedInUserId, formData);
-    console.log(response);
     setIsPosting(false);
     navigate('/status-list');
   };
@@ -90,10 +88,11 @@ const PostStatus: React.FC = () => {
               value={statusContent}
               onChange={handleInputChange}
               required
-            />
+              maxLength={800}
+            /><span className='max-words'>Max 800 words</span>
           </div>
         )}
-        <Button is_saving={isPosting} saving_text={"Posting..."} text="Post" />
+        <Button is_saving={isPosting} saving_text={'Posting...'} text="Post" />
       </form>
     </div>
   );

@@ -3,9 +3,9 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
-import { loginUser } from '../../apis/auth'; 
+import { loginUser } from '../../apis/auth';
 import { useAuth } from './AuthContext';
-import Button from '../Common/Button'; 
+import Button from '../Common/Button';
 
 interface FormData {
   username: string;
@@ -61,7 +61,7 @@ const Login: React.FC = () => {
           onChange={handleInputChange}
           required
         />
-        <Button is_saving={is_saving} text="Login" saving_text="Login in..."  />
+        <Button is_saving={is_saving} text="Login" saving_text="Login in..." />
       </form>
     </div>
   );

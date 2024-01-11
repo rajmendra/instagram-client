@@ -25,7 +25,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const login = (userId: string) => {
-    console.log('userId', userId);
     setLoggedInUserId(userId);
   };
 
@@ -34,7 +33,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     Cookies.remove('token');
     setLoggedInUserId(false);
   };
-  const userId: string | undefined =  Cookies.get('userId');;
+  const userId: string | undefined = Cookies.get('userId');
   return (
     <AuthContext.Provider
       value={{ loggedInUserId: userId, userProfile, login, logout, setUser }}

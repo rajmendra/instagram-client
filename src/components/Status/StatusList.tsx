@@ -78,7 +78,7 @@ const StatusList: React.FC = () => {
       dataLength={flattenedData.length}
       next={fetchNextPage}
       hasMore={!!hasNextPage}
-      loader={ <div />}
+      loader={<div />}
       endMessage={
         <div style={{ textAlign: 'center' }}>
           <b>Yay! You have seen it all</b>

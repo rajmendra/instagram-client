@@ -17,17 +17,19 @@ const CommentList: React.FC<any> = ({
         ))}
     </ul>
     {status.comments.length > 1 && (
-      <span className="show-more" ><a href="#"onClick={() => setShowAllComments(!showAllComments)}>
-        {showAllComments ? 'Show Less' : 'Show More'}
-      </a></span>
+      <span className="show-more">
+        <a href="#" onClick={() => setShowAllComments(!showAllComments)}>
+          {showAllComments ? 'Show Less' : 'Show More'}
+        </a>
+      </span>
     )}
     <div className="comment-section">
       <input
         type="text"
         value={newComment}
         onChange={(e) => setNewComment(e.target.value)}
-        placeholder="Add a comment..."
-        maxLength={200}
+        placeholder="Add a comment...(max 500 words)"
+        maxLength={500}
       />
       <button onClick={handleAddComment}>Post</button>
     </div>

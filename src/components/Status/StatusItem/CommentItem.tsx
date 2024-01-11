@@ -9,9 +9,15 @@ const CommentItem: React.FC<any> = ({ comment, index }) => (
         <span
           className="profile-picture"
           style={{ width: '30px', height: '30px' }}
-        ><Suspense>
-        <LazyImage src={comment.userId?.profilePicture} width={30} alt="User" className={"profile-picture-comment"} />
-      </Suspense>
+        >
+          <Suspense>
+            <LazyImage
+              src={comment.userId?.profilePicture}
+              width={30}
+              alt="User"
+              className={'profile-picture-comment'}
+            />
+          </Suspense>
         </span>
       </div>
       <div className="comment-col comment">

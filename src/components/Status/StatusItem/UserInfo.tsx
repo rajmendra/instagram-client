@@ -9,9 +9,9 @@ const UserInfo: React.FC<any> = ({
 }) => (
   <div className="user-info">
     <span className="profile-picture" style={{ width: '80px', height: '80px' }}>
-    <Suspense>
-              <LazyImage src={status.postedBy.profilePicture} alt="User" />
-            </Suspense>
+      <Suspense>
+        <LazyImage src={status.postedBy.profilePicture} alt="User" />
+      </Suspense>
     </span>
     <div className="user-details">
       <h2>{status.postedBy.fullName}</h2>
