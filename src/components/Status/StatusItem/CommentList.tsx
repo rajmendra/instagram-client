@@ -17,9 +17,9 @@ const CommentList: React.FC<any> = ({
         ))}
     </ul>
     {status.comments.length > 1 && (
-      <button onClick={() => setShowAllComments(!showAllComments)}>
+      <span className="show-more" ><a href="#"onClick={() => setShowAllComments(!showAllComments)}>
         {showAllComments ? 'Show Less' : 'Show More'}
-      </button>
+      </a></span>
     )}
     <div className="comment-section">
       <input
@@ -27,6 +27,7 @@ const CommentList: React.FC<any> = ({
         value={newComment}
         onChange={(e) => setNewComment(e.target.value)}
         placeholder="Add a comment..."
+        maxLength={200}
       />
       <button onClick={handleAddComment}>Post</button>
     </div>

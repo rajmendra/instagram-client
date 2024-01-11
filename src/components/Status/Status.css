@@ -149,6 +149,14 @@ li {
   margin-left: auto;
 }
 
+.show-more a{
+  color: #888;
+  font-size: 12px;
+  text-decoration: none;
+}
+.show-more a:hover{
+  text-decoration: underline;
+}
 /* Skeleton styles*/
 .skeleton-card {
   width: 100%;
