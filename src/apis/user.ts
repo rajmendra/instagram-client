@@ -4,7 +4,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 // Get user profile
 const getUserProfile = async (userId: any): Promise<any> => {
-  const url = `${API_URL}/user/profile/${userId}`;
+  const url = `${API_URL}/user/${userId}`;
 
   try {
     const data = await apiCall(url, 'GET');
@@ -20,7 +20,7 @@ const updateUser = async (
   loggedInUserId: string,
   data: FormData,
 ): Promise<void> => {
-  const url = `${API_URL}/user/profile/${loggedInUserId}`;
+  const url = `${API_URL}/user/${loggedInUserId}`;
 
   try {
     await apiCall(url, 'PUT', data, {
@@ -45,4 +45,17 @@ const getFollowingList = async (loggedInUserId: string): Promise<any> => {
   }
 };
 
-export { updateUser, getUserProfile, getFollowingList };
+const getUserLikes = async (loggedInUserId: string): Promise<any> => {
+  const url = `${API_URL}/user/${loggedInUserId}/likes`;
+
+  try {
+    const data = await apiCall(url, 'GET');
+    return data.likes;
+  } catch (error) {
+    console.error('Error fetching following list:', error);
+    throw error;
+  }
+};
+
+
+export { updateUser, getUserProfile, getFollowingList, getUserLikes };

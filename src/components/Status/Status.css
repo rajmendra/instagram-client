@@ -1,7 +1,7 @@
 /* PostStatus.css */
 
 .post-status-container {
-  max-width: 400px;
+  max-width: 600px;
   margin: 0 auto;
   padding: 20px;
 }
@@ -134,11 +134,35 @@ li {
   }
 }
 
-.user-info {
-  display: flex;
-  align-items: center;
+.userinfo-row {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
 }
-
+.userinfo-col {
+  font-size: smaller;
+  display: table-cell;
+}
+.userinfo-col:first-child {
+  width: 20%;
+  min-width: 80px;
+  padding-right: 10px;
+  vertical-align: middle;
+}
+.userinfo-col:nth-child(2) {
+  width: 60%;
+  display: table-cell;
+  vertical-align: middle;
+}
+.userinfo-col:nth-child(3) {
+  width: 20%;
+  vertical-align: middle;
+}
+@media (max-width: 900px) {
+  .userinfo-col:nth-child(2) {
+    width: 40%;
+}
+}
 .user-details {
   margin-left: 10px;
   display: flex;
@@ -156,12 +180,27 @@ li {
   margin-left: auto;
 }
 
-.show-more a {
+.show-more button {
+  border: 0px;
+        background-color: #fff;
   color: #888;
   font-size: 12px;
   text-decoration: none;
 }
-.show-more a:hover {
+.show-more button:hover {
+  border: 0px;
+        background-color: #fff;
+color: #888;
+font-size: 12px;
+text-decoration: none;
+  text-decoration: underline;
+}
+.show-more button:cli {
+  border: 0px;
+        background-color: #fff;
+color: #888;
+font-size: 12px;
+text-decoration: none;
   text-decoration: underline;
 }
 /* Skeleton styles*/

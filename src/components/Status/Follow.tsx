@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { followUser } from '../../apis/status';
+import Loader from '../Common/Loader'
 
 interface FollowingList {
   _id: string;
@@ -12,6 +13,7 @@ interface FollowProps {
   followingId: string;
   followingList: FollowingList[];
   refetchFollowers: any;
+  checkLogin: any;
 }
 
 const Follow: React.FC<FollowProps> = ({
@@ -19,38 +21,43 @@ const Follow: React.FC<FollowProps> = ({
   followingId,
   followingList,
   refetchFollowers,
+  checkLogin
 }) => {
+  const [isLoading, setLoading] = useState(false);
   const isAlreadyFollowing = followingList.some(
     (item) => item.followingId === followingId,
   );
 
-  return (
-    <div>
-      <button
-        onClick={() => handleFollow(userId, followingId, refetchFollowers)}
-      >
-        {isAlreadyFollowing ? 'Unfollow' : 'Follow'}
-      </button>
-    </div>
-  );
-};
-
+  
 const handleFollow = async (
   loggedInUserId: string,
   followingId: string,
   refetchStatuses: any,
 ) => {
   try {
-    if (!loggedInUserId || loggedInUserId === '') {
-      console.log(loggedInUserId);
-      toast.error('Please login first');
-      return false;
+    if (!checkLogin()) {
+      return;
     }
+    setLoading(true);
     await followUser(loggedInUserId, followingId);
     refetchStatuses();
   } catch (error) {
     console.error('Error toggling follow:', error);
+  }finally{
+    setLoading(false);
   }
 };
+
+  return (
+    <div>
+      <button
+        onClick={() => handleFollow(userId, followingId, refetchFollowers)}
+      >
+        {isLoading ? <Loader/>:  isAlreadyFollowing ? 'Unfollow' : 'Follow'}
+      </button>
+    </div>
+  );
+};
+
 
 export default Follow;

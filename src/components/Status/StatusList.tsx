@@ -4,22 +4,23 @@ import { useInfiniteQuery } from 'react-query';
 
 import { Skeleton } from '../Common/Skeleton';
 import { fetchStatus, fetchData } from '../../apis/status';
-import { getFollowingList } from '../../apis/user';
+import { getFollowingList, getUserLikes } from '../../apis/user';
 import StatusItem from './StatusItem/StatusItem';
 import { useAuth } from './../Auth/AuthContext';
 import { Status } from '../../interface/status-interfaces';
 
 const StatusList: React.FC = () => {
-  const [statuses, setStatuses] = useState<Status[]>([]);
+  const [likes, setLikes] = useState<Status[]>([]);
   const [followers, setFollowers] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false);
   const { loggedInUserId } = useAuth();
 
-  const getFollowingListUser = async () => {
+  const getUserLikesAndFollows  = async () => {
     if (loggedInUserId) {
       try {
         const followingList = await getFollowingList(loggedInUserId);
+        const likeList = await getUserLikes(loggedInUserId);
         setFollowers(followingList);
+        setLikes(likeList);
       } catch (error) {
         console.error('Error fetching statuses:', error);
       }
@@ -27,7 +28,7 @@ const StatusList: React.FC = () => {
   };
 
   useEffect(() => {
-    getFollowingListUser();
+    getUserLikesAndFollows();
   }, []);
 
   const {
@@ -53,7 +54,7 @@ const StatusList: React.FC = () => {
 
   const refetchFollowers = () => {
     refetch();
-    getFollowingListUser();
+    getUserLikesAndFollows();
   };
 
   if (isLoading) {
@@ -88,6 +89,7 @@ const StatusList: React.FC = () => {
       {flattenedData.map((status, i) => (
         <StatusItem
           followers={followers}
+          likes={likes}
           key={status._id}
           status={status}
           refetchStatuses={refetchStatuses}

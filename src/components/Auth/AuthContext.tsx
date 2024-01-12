@@ -20,7 +20,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [userProfile, setUserProfile] = useState<UserProfile>();
 
   const setUser = (user: UserProfile) => {
-    console.log('user', user);
     setUserProfile(user);
   };
 
