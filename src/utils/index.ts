@@ -1,4 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import Cookies from 'js-cookie';
+
 const apiCall = async (
   url: string,
   method: string,
@@ -11,7 +13,7 @@ const apiCall = async (
       method,
       data,
       headers: {
-        'auth-token': localStorage.getItem('token'),
+        'auth-token': Cookies.get('token'),
         'Content-Type': config?.headers?.content_type || 'application/json',
       },
     });
