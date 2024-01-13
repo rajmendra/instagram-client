@@ -119,6 +119,7 @@ const EditProfile: React.FC = () => {
           type="text"
           name="username"
           value={formData.username}
+          disabled={true}
           onChange={handleInputChange}
           required
         />
