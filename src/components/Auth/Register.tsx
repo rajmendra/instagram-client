@@ -42,7 +42,6 @@ const Registration: React.FC = () => {
     setUploading(true);
     try {
       const response = await registerUser(formData);
-      console.log('Registration successful:', response.message);
       toast.success('Registration successful');
       navigate('/login');
 

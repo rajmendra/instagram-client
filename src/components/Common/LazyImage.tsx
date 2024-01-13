@@ -1,6 +1,6 @@
 import React from 'react';
 import { IKImage } from 'imagekitio-react';
-import PlaceHolder from '../../assets/noimg.jpg';
+import PlaceHolder from '../../assets/no-image.jpg';
 import './Common.css';
 
 const urlEndpoint = 'https://ik.imagekit.io/j5laypcak';

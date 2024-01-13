@@ -27,7 +27,7 @@ const CommentList: React.FC<any> = ({
       setNewComment('');
       refetchStatuses(false);
     } catch (error: any) {
-      toast.error(error);
+      toast.error(error?.response?.data?.error);
       console.error('Error adding comment:', error);
     }
     finally{

@@ -87,7 +87,6 @@ const postStatus = async (
   const url = `${API_URL}/status/${loggedInUserId}`;
 
   try {
-    console.log('data', data);
     return apiCall(url, 'POST', data, {
       headers: { content_type: 'multipart/form-data' },
     });

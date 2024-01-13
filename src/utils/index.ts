@@ -13,7 +13,7 @@ const apiCall = async (
       method,
       data,
       headers: {
-        'auth-token': Cookies.get('token'),
+        'Authorization': Cookies.get('token'),
         'Content-Type': config?.headers?.content_type || 'application/json',
       },
     });

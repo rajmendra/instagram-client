@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useInfiniteQuery } from 'react-query';
-
+import ScrollToTop from "react-scroll-to-top";
 import { Skeleton } from '../Common/Skeleton';
 import { fetchStatus, fetchData } from '../../apis/status';
 import { getFollowingList, getUserLikes } from '../../apis/user';
@@ -96,6 +96,7 @@ const StatusList: React.FC = () => {
           refetchFollowers={refetchFollowers}
         />
       ))}
+      <ScrollToTop smooth />
     </InfiniteScroll>
   );
 };
